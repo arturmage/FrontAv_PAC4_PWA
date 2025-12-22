@@ -1,0 +1,34 @@
+<div class="topbar">
+  <mat-form-field appearance="outline" class="search">
+    <input
+      matInput
+      [(ngModel)]="query"
+      placeholder="Search books (Open Library)"
+    />
+  </mat-form-field>
+
+  <button mat-raised-button (click)="search()">Search</button>
+
+  <mat-button-toggle-group [(ngModel)]="viewMode" class="toggle">
+    <mat-button-toggle value="cards">Cards</mat-button-toggle>
+    <mat-button-toggle value="table">Table</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+@if (loading) {
+  <div class="center">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+} @else {
+  <div @listIn>
+    @if (viewMode === 'cards') {
+      <div class="cards">
+        @for (b of books; track b.workId) {
+          <app-book-card [book]="b" (selected)="openDetail($event)"></app-book-card>
+        }
+      </div>
+    } @else {
+      <app-book-grid [books]="books" (selected)="openDetail($event)"></app-book-grid>
+    }
+  </div>
+}

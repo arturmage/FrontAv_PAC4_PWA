@@ -1,0 +1,59 @@
+<button mat-button (click)="back()">← Back</button>
+
+@if (loading) {
+  <div class="center">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+} @else if (work) {
+  <div class="header">
+    @if (coverUrl(); as url) {
+      <img class="cover" [src]="url" [alt]="work.title" />
+    }
+
+    <div>
+      <h2>{{ work.title }}</h2>
+      <div class="muted">Work ID: {{ workId }}</div>
+
+      <button mat-raised-button (click)="toggleAll()">
+        {{ showAll ? 'Hide all details' : 'Show all details' }}
+      </button>
+    </div>
+  </div>
+
+  @if (showAll) {
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Description</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ descriptionText() }}</p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Subjects</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        @if (work.subjects?.length) {
+          <ul>
+            @for (s of work.subjects; track s) {
+              <li>{{ s }}</li>
+            }
+          </ul>
+        } @else {
+          <p>No subjects</p>
+        }
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Raw JSON</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <pre>{{ work | json }}</pre>
+      </mat-expansion-panel>
+    </mat-accordion>
+  }
+} @else {
+  <p>No detail found.</p>
+}
