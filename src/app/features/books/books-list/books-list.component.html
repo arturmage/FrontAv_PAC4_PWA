@@ -7,11 +7,11 @@
     />
   </mat-form-field>
 
-  <button mat-raised-button (click)="search()">Search</button>
+  <button mat-raised-button (click)="search()">Busca</button>
 
   <mat-button-toggle-group [(ngModel)]="viewMode" class="toggle">
-    <mat-button-toggle value="cards">Cards</mat-button-toggle>
-    <mat-button-toggle value="table">Table</mat-button-toggle>
+    <mat-button-toggle value="cards">Targetes</mat-button-toggle>
+    <mat-button-toggle value="table">Taula</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
 
@@ -22,11 +22,14 @@
 } @else {
   <div @listIn>
     @if (viewMode === 'cards') {
-      <div class="cards">
-        @for (b of books; track b.workId) {
-          <app-book-card [book]="b" (selected)="openDetail($event)"></app-book-card>
-        }
-      </div>
+      <div class="bookshelf">
+  <div class="cards">
+    @for (b of books; track b.workId) {
+      <app-book-card [book]="b" (selected)="openDetail($event)"></app-book-card>
+    }
+  </div>
+</div>
+
     } @else {
       <app-book-grid [books]="books" (selected)="openDetail($event)"></app-book-grid>
     }

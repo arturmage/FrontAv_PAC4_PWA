@@ -45,7 +45,7 @@ export class BooksListComponent implements OnInit {
   books: BookListItem[] = [];
 
   viewMode: ViewMode = 'cards';
-  query = 'angular';
+  query = 'bruixes';
 
   constructor(private ol: OpenLibraryService, private router: Router) {}
 

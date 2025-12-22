@@ -63,8 +63,8 @@ export class BooksDetailComponent implements OnInit {
 
   descriptionText(): string {
     const d = this.work?.description;
-    if (!d) return 'No description';
+    if (!d) return '---';
     if (typeof d === 'string') return d;
-    return d.value ?? 'No description';
+    return d.value ?? '---';
   }
 }

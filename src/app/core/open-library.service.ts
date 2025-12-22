@@ -16,9 +16,6 @@ import {
 export class OpenLibraryService {
   constructor(private http: HttpClient) {}
 
-  /**
-   * Home list (search)
-   */
   searchBooks(query: string, page = 1, limit = 20): Observable<BookListItem[]> {
     const fields = [
       'key',
@@ -50,18 +47,12 @@ export class OpenLibraryService {
     );
   }
 
-  /**
-   * Detail by workId (ex: OL45883W)
-   */
   getWork(workId: string): Observable<OpenLibraryWork> {
     return this.http.get<OpenLibraryWork>(
       `${OPEN_LIBRARY_BASE_URL}/works/${workId}.json`
     );
   }
 
-  /**
-   * Covers helper (image)
-   */
   coverUrlById(coverId: number, size: 'S' | 'M' | 'L' = 'M'): string {
     return coverUrlById(coverId, size);
   }
